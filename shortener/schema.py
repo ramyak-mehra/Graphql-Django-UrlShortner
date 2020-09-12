@@ -10,7 +10,7 @@ class URLType(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
-    urls = graphene.List(URLType , url = graphene.String() , first=graphene.Int(), skip=graphene.Int())
+    urls = graphene.List(URLType , url = graphene.String())
 
     def resolve_urls(self, info, url = None ,**kwargs):
         queryset = URL.objects.all()
@@ -18,9 +18,4 @@ class Query(graphene.ObjectType):
         if url:
              _filter = Q(full_url__icontains=url)
              queryset = queryset.filter(_filter)
-        if first:
-            queryset = queryset[:first]
-
-        if skip:
-            queryset = queryset[skip:]
         return URL.objects.all()

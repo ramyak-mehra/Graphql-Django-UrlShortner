@@ -76,9 +76,13 @@ WSGI_APPLICATION = 'shorty.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": config("POSTGRES_DB", os.path.join(BASE_DIR, "db.sqlite3")),
+        "USER": config("POSTGRES_USER", "user"),
+        "PASSWORD": config("POSTGRES_PASSWORD", "password"),
+        "HOST": config("SQL_HOST", "localhost"),
+        "PORT": config("SQL_PORT", "5432"),
     }
 }
 
