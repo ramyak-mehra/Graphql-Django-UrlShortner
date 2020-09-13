@@ -1,8 +1,6 @@
 from decouple import config
 from pathlib import Path
-import environ
-from environ import Env, Path
-env = Env()
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,7 +22,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
-     'shortener',
+    "applications",
+    'shortener',
 ]
 
 MIDDLEWARE = [
@@ -63,15 +62,14 @@ WSGI_APPLICATION = 'shorty.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": config("POSTGRES_DB", os.path.join(BASE_DIR, "db.sqlite3")),
-        "USER": config("POSTGRES_USER", "user"),
-        "PASSWORD": config("POSTGRES_PASSWORD", "password"),
+        "ENGINE": config("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": config("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
+        "USER": config("SQL_USER", "user"),
+        "PASSWORD": config("SQL_PASSWORD", ""),
         "HOST": config("SQL_HOST", "localhost"),
         "PORT": config("SQL_PORT", "5432"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -114,3 +112,4 @@ STATIC_URL = '/static/'
 GRAPHENE = {
     'SCHEMA': 'shorty.schema.schema',
 }
+ALLOWED_HOSTS = ["*"]
