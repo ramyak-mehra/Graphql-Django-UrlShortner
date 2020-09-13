@@ -4,7 +4,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config('SECRET_KEY', "secret_key" ,cast=str)
+SECRET_KEY = '%mmqk6xbd25aib2#cv9xi6+ay3yqvvu!3o#oj6&t%!qp03b3o+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'graphene_django',
     "applications",
     'shortener',
@@ -61,27 +62,16 @@ WSGI_APPLICATION = 'shorty.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": config("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": config("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
-        "USER": config("POSTGRES_USER", "user"),
-        "PASSWORD": config("POSTGRES_PASSWORD", ""),
-        "HOST": config("SQL_HOST", "localhost"),
-        "PORT": config("SQL_PORT", "5432"),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'urlshortener',
+        'USER': 'urlshortener',
+        'PASSWORD': 'password',
+        'HOST': "localhost",
+        'PORT': 5432,
     }
 }
 
-if os.environ.get('GITHUB_WORKFLOW'):
-    DATABASES = {
-        'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'github_actions',
-           'USER': 'postgres',
-           'PASSWORD': 'postgres',
-           'HOST': '127.0.0.1',
-           'PORT': '5432',
-        }
-    }
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -123,4 +113,4 @@ STATIC_URL = '/static/'
 GRAPHENE = {
     'SCHEMA': 'shorty.schema.schema',
 }
-ALLOWED_HOSTS = ["*"]
+SITE_ID = 1
