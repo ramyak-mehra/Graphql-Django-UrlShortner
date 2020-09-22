@@ -26,10 +26,9 @@ class URL(models.Model):
         self.save()
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.url_hash = md5(self.full_url.encode()).hexdigest()[:10]
-            current_url = Site.objects.get_current().domain
-            self.shortened_url = f'{current_url}/{self.url_hash}'
+        self.url_hash = md5(self.full_url.encode()).hexdigest()[:10]
+        current_url = Site.objects.get_current().domain
+        self.shortened_url = f'{current_url}/{self.url_hash}'
         validate = URLValidator()
 
         try:
