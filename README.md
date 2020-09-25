@@ -12,10 +12,38 @@
 
 ## Usage
 
+### Clone the repo
+
+```sh
+git clone  
+```
+### Activate virtual environment
+
+```sh
+virtualenv vevn
+source venv/bin/activate(linux)
+venv/Scripts/activate(Windows)
+```
+### Install requirements
+
+```sh
+pip install -r requirements
+```
+### Migrate db
+```sh
+python manage.py migrate
+```
+### Create Superuser
+
+```sh
+python manage.py createsuperuser
+```
+### Start the Django Server
+
 ```sh
 python manage.py runserver
 ```
-
+### It will run the server on localhost at port 8000 (by default)
 ## Author
 
 👤 **Ramyak Mehra**
