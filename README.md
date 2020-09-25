@@ -9,6 +9,9 @@
 </p>
 
 > A url shortener made using django and graphql
+### Trial
+Website : https://l.vexio.in/graphql <br>
+Trial Application Token - f3590125-8ef9-44ac-88fd-d4b02a999795
 
 ## Usage
 
