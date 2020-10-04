@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load bulma_tags %}
+{% block content %}
+<section class="section">
+    <div class="container has-text-centered">
+        <h1 class="title">
+            {{ website_name }}
+        </h1>
+        <p class="subtitle">
+            Redirect Link System
+        </p>
+    </div>
+</section>
+
+{% if shortened_url %}
+<section class="section">
+    <div class="container has-text-centered">
+        <p class="subtitle">
+            Link Generated is <strong>{{ shortened_url }}</strong>
+        </p>
+    </div>
+</section>
+{% endif %}
+<section class="section">
+    <div class="columns is-centered">
+        <div class="column is-half ">
+
+            <p class="subtitle has-text-centered has-text-weight-bold">
+                Create New Link
+            </p>
+            <div class="content-section">
+                <p class="subtitle has-text-centered has-text-weight-bold">
+                    {{ form.errors }}
+                </p>
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+
+                        {{ form|bulma }}
+                    </fieldset>
+
+                    <div class="form-group">
+                        <div class="form-group ">
+                            <div class="control ">
+                                <button class="my-2  has-text-centered button is-link is-fullwidth" type="submit">
+                                    <span class="icon mx-1 ">
+                                        <i class="is-small fas fa-upload"></i>
+                                    </span>
+                                    <strong> Create Link </strong>
+                                </button>
+                            </div>
+                            <small>
+                                This page is protected by Google reCAPTCHA to ensure you're not a bot
+                            </small>
+                        </div>
+                </form>
+                <div class="border-top pt-3 columns is-multiline is-mobile">
+                    <div class="column is-one-quarte">
+                        <a class="button is-warning " href="/admin">
+                            <span class="icon mx-1 ">
+                                <i class="is-small fas fa-lock"></i>
+                            </span>
+                            <strong> Admin Panel </strong>
+                        </a>
+                        <small class="text-muted" style="float: right;">
+
+                            <a class="ml-2 button is-primary" href="http://{{ website_name }}">
+                                <span class="icon mx-1 ">
+                                    <i class="is-small fas fa-home"></i>
+                                </span>
+                                <strong> {{ website_name }} </strong>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
