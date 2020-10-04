@@ -133,7 +133,7 @@ SITE_ID = 1
 # Captcha System
 
 INSTALLED_APPS += ['captcha', ]
-RECAPTCHA_PUBLIC_KEY = os.environ['RECAPTCHA_PUBLIC_KEY']
-RECAPTCHA_PRIVATE_KEY = os.environ['RECAPTCHA_PRIVATE_KEY']
+RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", default=False)
+RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", default=False)
 
-WEBSITE_NAME = os.environ['WEBSITE_NAME']
+WEBSITE_NAME = os.environ.get("WEBSITE_NAME", default=False)
