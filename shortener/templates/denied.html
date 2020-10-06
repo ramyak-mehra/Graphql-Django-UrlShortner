@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load bulma_tags %}
+{% block content %}
+<section class="section columns">
+    <div class="container box column is-half mt-5 has-text-centered">
+        <h1 class="title">
+            {{ website_name }} : Redirect Attention
+        </h1>
+        <br>
+        <p class="subtitle">
+            {{site_name}} service has found that The website that you were trying to access has been flagged and can be
+            <strong>potentianly unsafe </strong>. You can still click on the link
+            and it's upto your decesion to continue to the website.
+            <a href="{{ link }}">{{ link }}</a>
+        </p>
+        <br>
+        <small class="text-muted">
+
+            <a class="ml-2 button is-link is-fullwidth " href="http://{{ website_name }}">
+                <span class="icon mx-1 ">
+                    <i class="is-small fas fa-home"></i>
+                </span>
+                <strong> Go Back to {{ website_name }} </strong>
+            </a>
+        </small>
+    </div>
+</section>
+
+{% endblock content %}

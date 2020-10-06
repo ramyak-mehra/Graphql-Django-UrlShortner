@@ -23,8 +23,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'graphene_django',
-    "applications",
+    'applications',
     'shortener',
+    'bulma',
+    'django_extensions'
+
 ]
 
 MIDDLEWARE = [
@@ -76,12 +79,12 @@ DATABASES = {
 if os.environ.get('GITHUB_WORKFLOW'):
     DATABASES = {
         'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'github_actions',
-           'USER': 'postgres',
-           'PASSWORD': 'postgres',
-           'HOST': '127.0.0.1',
-           'PORT': '5432',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'github_actions',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
         }
     }
 
@@ -127,3 +130,12 @@ GRAPHENE = {
     'SCHEMA': 'shorty.schema.schema',
 }
 SITE_ID = 1
+# Captcha System
+
+INSTALLED_APPS += ['captcha', ]
+RECAPTCHA_PUBLIC_KEY = os.environ.get(
+    "RECAPTCHA_PUBLIC_KEY", default="6LeTp9MZAAAAAFYSpYUXKwlXPeOOoxj1XHRGrWcE")
+RECAPTCHA_PRIVATE_KEY = os.environ.get(
+    "RECAPTCHA_PRIVATE_KEY", default="6LeTp9MZAAAAAAZpCeXgF95_DZT_t9xJ1glFWSjB")
+
+WEBSITE_NAME = os.environ.get("WEBSITE_NAME", default="example.com")

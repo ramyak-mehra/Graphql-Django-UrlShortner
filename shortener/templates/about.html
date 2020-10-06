@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load bulma_tags %}
+{% block content %}
+<section class="section columns">
+    <div class="container box column is-half mt-5 has-text-centered">
+        <h1 class="title">
+           About {{ website_name }} Redirect Service
+        </h1>
+        <br>
+        <p class="subtitle">
+           {{ website_name }} uses the {{ site_name }} domain as part of a service to protect users from harmful activity, 
+            to provide value for the developer ecosystem, and as a quality signal for surfacing relevant, 
+            intresting user activity
+        </p>
+        <br>
+    </div>
+</section>
+
+{% endblock content %}
