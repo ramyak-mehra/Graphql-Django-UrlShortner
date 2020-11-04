@@ -29,7 +29,8 @@ class URL(models.Model):
     def save(self, *args, **kwargs):
         self.url_hash = md5(self.full_url.encode()).hexdigest()[:10]
         current_url = Site.objects.get_current().domain
-        self.shortened_url = f'http://{current_url}/{self.url_hash}'
+        if len(self.shortened_url) == 0:
+            self.shortened_url = f'http://{current_url}/{self.url_hash}'
         validate = URLValidator()
 
         try:
