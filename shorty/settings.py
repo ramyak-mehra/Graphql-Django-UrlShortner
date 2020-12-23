@@ -26,7 +26,10 @@ INSTALLED_APPS = [
     'applications',
     'shortener',
     'bulma',
-    'django_extensions'
+    'django_extensions',
+    'notifications',
+    'push_notifications',
+    'rest_framework',
 
 ]
 
@@ -75,7 +78,12 @@ DATABASES = {
         "PORT": config("SQL_PORT", "5432"),
     }
 }
+PUSH_NOTIFICATIONS_SETTINGS = {
 
+    "USER_MODEL" : "notifications.NotificationUser",
+    "FCM_API_KEY" : config("FCM_API_KEY" , "")
+
+}
 if os.environ.get('GITHUB_WORKFLOW'):
     DATABASES = {
         'default': {
@@ -87,6 +95,10 @@ if os.environ.get('GITHUB_WORKFLOW'):
             'PORT': '5432',
         }
     }
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -138,4 +150,4 @@ RECAPTCHA_PUBLIC_KEY = os.environ.get(
 RECAPTCHA_PRIVATE_KEY = os.environ.get(
     "RECAPTCHA_PRIVATE_KEY", default="6LeTp9MZAAAAAAZpCeXgF95_DZT_t9xJ1glFWSjB")
 
-WEBSITE_NAME = os.environ.get("WEBSITE_NAME", default="example.com")
+WEBSITE_NAME = os.environ.get("WEBSITE_NAME", default="vexio.xyz")
