@@ -26,7 +26,6 @@ def root(request, url_hash):
 def createlink(request):
 
     if request.method == 'POST':
-        form = CreateLinkForm(request.POST)
         full_url = request.POST.get('full_url', False)
         url_obj = False
         try:

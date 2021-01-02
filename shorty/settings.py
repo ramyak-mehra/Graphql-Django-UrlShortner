@@ -1,6 +1,12 @@
 from decouple import config
 from pathlib import Path
 import os
+from .credentials import username, password
+# import environ
+# from environ import Env, Path
+# from decouple import config
+# env = Env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -151,3 +157,16 @@ RECAPTCHA_PRIVATE_KEY = os.environ.get(
     "RECAPTCHA_PRIVATE_KEY", default="6LeTp9MZAAAAAAZpCeXgF95_DZT_t9xJ1glFWSjB")
 
 WEBSITE_NAME = os.environ.get("WEBSITE_NAME", default="vexio.xyz")
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = username
+EMAIL_HOST_PASSWORD = password
+
+SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
+# Find templates in the same folder as settings.py.
+TEMPLATE_DIRS = (
+    os.path.join(SETTINGS_PATH, 'templates'),
+)

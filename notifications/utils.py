@@ -1,8 +1,11 @@
 import enum
 from push_notifications.models import APNSDevice, GCMDevice
-from django.core.mail import EmailMessage
+from django.core import mail
 from django.template.loader import render_to_string
 from .models import Notification , NotificationUser
+from django.conf import settings 
+
+
 class NotificationType(enum.Enum):
     NewQuestion = "New Question was uploaded to "
     NewReply = "New Reply on your question "
@@ -19,15 +22,34 @@ def send_firebase_notifications(users , title , body , extra=None):
                 user_devices.send_message(body, title = title)
 
 
-def send_email(users , title , subject,  body , extra=None):
+def send_email(users, title, subject,  body, extra=None):
+    connection = mail.get_connection()
+    email_list = []
     for user in users:
-        mail_subject = subject
-        message = render_to_string('notifications/email.html', {
-            'title': title,
-            'body' : body,
-        })
-        to_email = user.email
-        email = EmailMessage(
-            mail_subject, message, to=[to_email]
+        email = mail.EmailMessage(
+            subject,
+            render_to_string('notifications/email.html', {
+                'user': user.username,
+                'body': body
+            }),
+            settings.EMAIL_HOST_USER,
+            [user],
+            connection=connection,
         )
-        email.send()
+        email_list.append(email)
+
+    connection.send_messages(email_list)
+
+    # connection = mail.get_connection()
+    # email = mail.EmailMessage(
+    #     subject,
+    #     render_to_string('notifications/email.html', {
+    #         'user': 'sanchit',
+    #         'body': body
+    #     }),
+    #     settings.EMAIL_HOST_USER,
+    #     users,
+    #     connection=connection,
+    # )
+
+    # connection.send_messages(email)
