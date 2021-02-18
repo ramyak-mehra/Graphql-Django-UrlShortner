@@ -5,10 +5,10 @@ from .forms import CreateLinkForm
 from django.contrib.sites.models import Site
 from shorty.settings import WEBSITE_NAME
 
-site_name = Site.objects.get_current().domain
-
 
 def root(request, url_hash):
+    site_name = Site.objects.get_current().domain
+
     url = get_object_or_404(URL, url_hash=url_hash)
     url.clicked()
     if url.is_flagged:
@@ -24,6 +24,8 @@ def root(request, url_hash):
 
 @login_required
 def createlink(request):
+    site_name = Site.objects.get_current().domain
+
 
     if request.method == 'POST':
         form = CreateLinkForm(request.POST)
@@ -58,6 +60,7 @@ def createlink(request):
 
 
 def about(request):
+    site_name = Site.objects.get_current().domain
     context = {
         'site_name': site_name,
         'website_name': WEBSITE_NAME
