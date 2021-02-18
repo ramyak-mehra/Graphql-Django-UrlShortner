@@ -1,7 +1,7 @@
 from decouple import config
 from pathlib import Path
 import os
-from .credentials import username, password
+
 # import environ
 # from environ import Env, Path
 # from decouple import config
@@ -162,8 +162,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = username
-EMAIL_HOST_PASSWORD = password
+EMAIL_HOST_USER = config("EMAIL", "")
+EMAIL_HOST_PASSWORD = config("EMAIL_PASSWORD", "")
 
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 # Find templates in the same folder as settings.py.
